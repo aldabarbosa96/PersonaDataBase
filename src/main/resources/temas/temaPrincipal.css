@@ -1,0 +1,68 @@
+/* Fondo de la ventana principal */
+.root {
+    -fx-background-color: #bdbdbd;
+}
+
+/* Estilo para la tabla */
+.table-view {
+    -fx-background-color: #e8e8e8;
+    -fx-border-color: #a0a0a0;
+    -fx-border-width: 2px;
+    -fx-border-radius: 2px;
+}
+.table-row-cell:odd {
+    -fx-background-color: #e0e0e0;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #eeeeee;
+}
+
+.table-row-cell:filled:selected, .table-cell:filled:selected {
+    -fx-background-color: #4a90e2;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #505050;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;
+}
+
+
+/* Estilo para los botones */
+.button {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #357ABD;
+}
+.button.eliminar {
+    -fx-background-color: #e53935;
+    -fx-text-fill: #ffffff;
+}
+
+.button.eliminar:hover {
+    -fx-background-color: #c62828;
+}
+
+/* Estilo para el campo de texto */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #b0b0b0;
+    -fx-border-radius: 3px;
+    -fx-border-width: 1px;
+}
+
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+}
