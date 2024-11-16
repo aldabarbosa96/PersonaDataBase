@@ -27,7 +27,7 @@ public class MainDBWindow extends Application {
         db.conectarDB();
         db.crearTabla();
 
-        createMainLayout();
+        crearMainLayout();
 
         Scene scene = new Scene(root, 1426, 975);
         scene.getStylesheets().add(getClass().getResource("/temas/temaPrincipal.css").toExternalForm());
@@ -36,20 +36,20 @@ public class MainDBWindow extends Application {
         stage.show();
     }
 
-    public void createMainLayout() {
+    public void crearMainLayout() {
         root = new VBox();
         root.setPadding(new Insets(35, 25, 35, 25));
         root.setSpacing(35);
 
-        initializeForms();
-        initializeButtons();
-        initializeTables();
-        updateTable();
+        inicializarFormularios();
+        inicializarBotones();
+        inicializarTabla();
+        actualizarTabla();
 
         root.getChildren().addAll(formulario, table);
     }
 
-    public void initializeForms() {
+    public void inicializarFormularios() {
         formulario = new GridPane();
         formulario.setHgap(10);
         formulario.setVgap(10);
@@ -95,7 +95,7 @@ public class MainDBWindow extends Application {
         formulario.add(rolTextField,1,8);
     }
 
-    public void initializeButtons() {
+    public void inicializarBotones() {
         Button botonGuardar = new Button("Guardar");
         Button botonEliminar = new Button("Eliminar");
         botonEliminar.getStyleClass().add("eliminar");
@@ -121,7 +121,7 @@ public class MainDBWindow extends Application {
                     personaSeleccionada.setRol(((TextField) formulario.getChildren().get(15)).getText());
 
                     db.actualizarPersona(personaSeleccionada);
-                    updateTable();
+                    actualizarTabla();
                 } else {
                     String nombre = ((TextField) formulario.getChildren().get(1)).getText();
                     String apellido1 = ((TextField) formulario.getChildren().get(3)).getText();
@@ -137,9 +137,9 @@ public class MainDBWindow extends Application {
 
                     Persona nuevaPersona = new Persona(0, nombre, apellido1, apellido2, fechaNacimiento, direccion, email, telefono, rol);
                     db.insertarPersona(nuevaPersona);
-                    updateTable();
+                    actualizarTabla();
                 }
-                clearForm();
+                limpiarFormulario();
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error al guardar la persona: " + e.getMessage());
                 alert.show();
@@ -152,7 +152,7 @@ public class MainDBWindow extends Application {
             if (personaSeleccionada != null) {
                 try {
                     db.eliminarPersona(personaSeleccionada.getId());
-                    updateTable();
+                    actualizarTabla();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Persona eliminada exitosamente.");
                     alert.show();
                 } catch (SQLException e) {
@@ -169,7 +169,7 @@ public class MainDBWindow extends Application {
         formulario.add(botonEliminar, 1, 10);
     }
 
-    private void clearForm() {
+    private void limpiarFormulario() {
         formulario.getChildren().forEach(node -> {
             if (node instanceof TextField) {
                 ((TextField) node).clear();
@@ -179,7 +179,7 @@ public class MainDBWindow extends Application {
         });
     }
 
-    public void initializeTables() {
+    public void inicializarTabla() {
         table = new TableView<>();
         table.setPlaceholder(new Label("No hay personas registradas"));
         table.setMinHeight(500);
@@ -250,7 +250,7 @@ public class MainDBWindow extends Application {
     }
 
 
-    private void updateTable() {
+    private void actualizarTabla() {
         table.getItems().clear();
 
         try {
